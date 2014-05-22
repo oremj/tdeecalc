@@ -1,0 +1,71 @@
+<!doctype html>
+<html ng-app="tdee">
+    <head>
+        <script src="bower_components/angular/angular.min.js"></script>
+        <script src="tdee.js"></script>
+
+        <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="bower_components/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet">
+        <link href="bower_components/fontawesome/css/font-awesome.min.css" rel="stylesheet">
+    </head>
+    <body>
+        <div ng-controller="TdeeCtrl" class="container">
+            <div class="page-header">
+                <h1>TDEE Calculator</h1>
+            </div>
+            <div class="row">
+                <div class="col-sm-offset-2 col-sm-4">
+                    <form ng-submit="calcTdee()" action="" role="form" class="input-lg">
+                        <div class="form-group">
+                            <label>Weight ({{ weightUnit }})</label>
+                            <input class="form-control" type="number" ng-change="calcTdee()" ng-model="weight" placeholder="Weight">
+                        </div>
+                        <div class="form-group">
+                            <label>Height ({{ heightUnit }})</label>
+                            <input class="form-control" type="number" ng-change="calcTdee()" ng-model="height" placeholder="Height">
+                        </div>
+                        <div class="form-group">
+                            <label>Age</label>
+                            <input class="form-control" type="number" ng-change="calcTdee()" ng-model="age" placeholder="Age">
+                        </div>
+                        <div class="form-group">
+                            <label>Sex</label>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" ng-change="calcTdee()" ng-model="sex" value="male">
+                                    Male
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" ng-change="calcTdee()" ng-model="sex" value="female">
+                                    Female
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Units</label>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" ng-change="calcTdee()" ng-model="units" value="metric">
+                                    Metric
+                                </label>
+                            </div>
+                            <div class="radio">
+                                <label>
+                                    <input type="radio" ng-change="calcTdee()" ng-model="units" value="imperial">
+                                    Imperial (US)
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-4">
+                    <p class="well h2 text-center">{{tdeeRes}} <small>kcal/day</small></p>
+                </div>
+            </div>
+        </div>
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    </body>
+</html>
