@@ -3,27 +3,25 @@ angular.module('tdee', []).controller('TdeeCtrl', function($scope, $locale) {
     $scope.customMultiplier = 1.9;
 
     $scope.age = 35;
-    $scope.height = 72;
+    $scope.height = 183;
     $scope.sex = "male";
-    $scope.units = "imperial";
-    $scope.weight = 185;
+    $scope.weight = 83;
 
-    $scope.setUnits = function() {
-        if ($scope.units == "metric") {
-            $scope.weightUnit = "Kilograms";
-            $scope.heightUnit = "Centimeters";
-            return;
-        }
-        $scope.weightUnit = "Pounds";
-        $scope.heightUnit = "Inches";
-    };
-    $scope.lbToKg = function(w) {
-        if ($scope.units == "metric") return w;
+
+    lbToKg = function(w) {
         return w * 0.463592;
     };
-    $scope.inToCm = function(h) {
-        if ($scope.units == "metric") return h;
+
+    kgToLb = function(w) {
+        return w * 2.20462;
+    };
+
+    inToCm = function(h) {
         return h * 2.54;
+    };
+
+    cmToIn = function(h) {
+        return h * 0.393701;
     };
 
     $scope.sexWeight = function() {
@@ -32,13 +30,33 @@ angular.module('tdee', []).controller('TdeeCtrl', function($scope, $locale) {
     };
 
     $scope.calcTdee = function() {
-        $scope.setUnits();
-
-        var weight = $scope.lbToKg($scope.weight);
-        var height = $scope.inToCm($scope.height);
-        $scope.bmr = 10 * weight + 6.25 * height - 5 * $scope.age + $scope.sexWeight();
+        $scope.bmr = 10 * $scope.weight + 6.25 * $scope.height - 5 * $scope.age + $scope.sexWeight();
     };
 
-    $scope.setUnits();
+    $scope.updateLb = function() {
+        $scope.weight = Math.round(lbToKg($scope.weightLb));
+        $scope.calcTdee();
+    };
+
+    $scope.updateIn = function() {
+        var inches = $scope.heightFt * 12 + $scope.heightIn;
+        $scope.height = Math.round(inToCm(inches));
+        $scope.calcTdee();
+    };
+
+    $scope.updateCm = function() {
+        var inches = Math.round(cmToIn($scope.height));
+        $scope.heightFt = Math.floor(inches / 12);
+        $scope.heightIn = Math.round(inches - 12 * $scope.heightFt);
+        $scope.calcTdee();
+    };
+
+    $scope.updateKg = function() {
+        $scope.weightLb = Math.round(kgToLb($scope.weight));
+        $scope.calcTdee();
+    };
+
+    $scope.updateKg();
+    $scope.updateCm();
     $scope.calcTdee();
 });
