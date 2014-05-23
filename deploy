@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -e
+set -u
+
+cd $(dirname "$0")
+
+rm -rf dist
+git clone --branch gh-pages "git@github.com:oremj/tdeecalc.git" dist
+
+rsync --exclude=".git" \
+    --exclude=".git-ignore" \
+    -av --delete app/ dist/
+
+cd dist;
+bower install
+
+git add .
+git commit -a -m "$(date)"
+git push
