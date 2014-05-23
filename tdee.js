@@ -35,7 +35,7 @@ angular.module('tdee', []).controller('TdeeCtrl', function($scope, $locale) {
 
         var weight = $scope.lbToKg($scope.weight);
         var height = $scope.inToCm($scope.height);
-        $scope.tdeeRes = Math.round(10 * weight + 6.25 * height + 5 * $scope.age + $scope.sexWeight());
+        $scope.tdeeRes = Math.round(10 * weight + 6.25 * height - 5 * $scope.age + $scope.sexWeight());
     };
 
     $scope.setUnits();
