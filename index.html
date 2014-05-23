@@ -62,16 +62,36 @@
                     </form>
                 </div>
                 <div class="col-sm-4">
-                    BMR
-                    <p class="well h2 text-center">{{bmr | number: 0}} <small>kcal/day</small></p>
-                    Sedentary (1.2x)
-                    <p class="well h2 text-center">{{bmr * 1.2 | number: 0}} <small>kcal/day</small></p>
-                    Lightly active (1.375x)
-                    <p class="well h2 text-center">{{bmr * 1.375 | number: 0}} <small>kcal/day</small></p>
-                    Moderately active (1.55x)
-                    <p class="well h2 text-center">{{bmr * 1.55 | number: 0}} <small>kcal/day</small></p>
-                    Custom: <input class="small-input" step="0.1" type="number" ng-model="customMultiplier">x
-                    <p class="well h2 text-center">{{bmr * customMultiplier | number: 0}} <small>kcal/day</small></p>
+                    <table class="table table-condensed table-hover">
+                        <thead>
+                            <tr>
+                                <th>Activity Level</th>
+                                <th>kcal/day</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>BMR</td>
+                                <td><strong>{{bmr | number: 0}}<strong></td>
+                            </tr>
+                            <tr>
+                                <td>Sedentary (1.2x)</td>
+                                <td><strong>{{bmr * 1.2 | number: 0}}<strong></td>
+                            </tr>
+                            <tr>
+                                <td>Lightly active (1.375x)</td>
+                                <td><strong>{{bmr * 1.375 | number: 0}}<strong></td>
+                            </tr>
+                            <tr>
+                                <td>Moderately active (1.55x)</td>
+                                <td><strong>{{bmr * 1.55 | number: 0}}<strong></td>
+                            </tr>
+                            <tr>
+                                <td>Custom: <input class="small-input" step="0.1" type="number" ng-model="customMultiplier">x</td>
+                                <td><strong>{{bmr * customMultiplier | number: 0}}<strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
