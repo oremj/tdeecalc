@@ -62,7 +62,16 @@
                     </form>
                 </div>
                 <div class="col-sm-4">
-                    <p class="well h2 text-center">{{tdeeRes}} <small>kcal/day</small></p>
+                    BMR
+                    <p class="well h2 text-center">{{bmr | number: 0}} <small>kcal/day</small></p>
+                    Sedentary (1.2x)
+                    <p class="well h2 text-center">{{bmr * 1.2 | number: 0}} <small>kcal/day</small></p>
+                    Lightly active (1.375x)
+                    <p class="well h2 text-center">{{bmr * 1.375 | number: 0}} <small>kcal/day</small></p>
+                    Moderately active (1.55x)
+                    <p class="well h2 text-center">{{bmr * 1.55 | number: 0}} <small>kcal/day</small></p>
+                    Custom: <input class="small-input" step="0.1" type="number" ng-model="customMultiplier">x
+                    <p class="well h2 text-center">{{bmr * customMultiplier | number: 0}} <small>kcal/day</small></p>
                 </div>
             </div>
         </div>
