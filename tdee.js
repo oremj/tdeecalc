@@ -6,7 +6,7 @@ angular.module('tdee', []).controller('TdeeCtrl', function($scope, $locale) {
     $scope.height = 183;
     $scope.sex = "male";
     $scope.weight = 83;
-
+    $scope.goalLbs = 0;
 
     lbToKg = function(w) {
         return w * 0.463592;
@@ -59,4 +59,15 @@ angular.module('tdee', []).controller('TdeeCtrl', function($scope, $locale) {
     $scope.updateKg();
     $scope.updateCm();
     $scope.calcTdee();
+}).directive('tdeeActivityRow', function() {
+    return {
+        restrict: "A",
+        scope: {
+            bmr: "=",
+            desc: "@",
+            goalLbs: "=",
+            mult: "="
+        },
+        templateUrl: "activity-row.html",
+    };
 });

@@ -51,6 +51,12 @@
                                 </label>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-sm-2">Goal</label>
+                            <div class="col-sm-10">
+                                <input class="small-input" step="0.1" type="number" ng-model="goalLbs" placeholder="lbs"> lbs/week
+                            </div>
+                        </div>
                     </form>
                 </div>
                 <div class="col-sm-4">
@@ -59,28 +65,18 @@
                             <tr>
                                 <th>Activity Level</th>
                                 <th>kcal/day</th>
+                                <th>Goal kcal/day</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>BMR</td>
-                                <td><strong>{{bmr | number: 0}}<strong></td>
-                            </tr>
-                            <tr>
-                                <td>Sedentary (1.2x)</td>
-                                <td><strong>{{bmr * 1.2 | number: 0}}<strong></td>
-                            </tr>
-                            <tr>
-                                <td>Lightly active (1.375x)</td>
-                                <td><strong>{{bmr * 1.375 | number: 0}}<strong></td>
-                            </tr>
-                            <tr>
-                                <td>Moderately active (1.55x)</td>
-                                <td><strong>{{bmr * 1.55 | number: 0}}<strong></td>
-                            </tr>
+                            <tr tdee-activity-row desc="BMR" mult="1" bmr="bmr" goal-lbs="goalLbs"></tr>
+                            <tr tdee-activity-row desc="Sedentary" mult="1.2" bmr="bmr" goal-lbs="goalLbs"></tr>
+                            <tr tdee-activity-row desc="Lightly active" mult="1.375" bmr="bmr" goal-lbs="goalLbs"></tr>
+                            <tr tdee-activity-row desc="Moderately active" mult="1.55" bmr="bmr" goal-lbs="goalLbs"></tr>
                             <tr>
                                 <td>Custom: <input class="small-input" step="0.1" type="number" ng-model="customMultiplier">x</td>
                                 <td><strong>{{bmr * customMultiplier | number: 0}}<strong></td>
+                                <td><strong>{{bmr * customMultiplier + goalLbs * 500 | number: 0}}<strong></td>
                             </tr>
                         </tbody>
                     </table>
