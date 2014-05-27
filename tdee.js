@@ -3,6 +3,8 @@ angular.module('tdee', []).controller('TdeeCtrl', function($scope, $locale) {
     $scope.customMultiplier = 1.9;
 
     $scope.age = 35;
+    $scope.bodyfat = 20;
+    $scope.formula = "mifflin";
     $scope.height = 183;
     $scope.sex = "male";
     $scope.weight = 83;
@@ -24,13 +26,21 @@ angular.module('tdee', []).controller('TdeeCtrl', function($scope, $locale) {
         return h * 0.393701;
     };
 
-    $scope.sexWeight = function() {
-        if ($scope.sex == "male") return 5;
-        return -161;
-    };
+    function mifflin(h, w, age, sex) {
+        var sexWeight = sex == "male" ? 5 : -161;
+        return 10 * w + 6.25 * h - 5 * age + sexWeight;
+    }
+
+    function katchMcArdle(lbm) {
+        return 370 + (21.6 * lbm);
+    }
 
     $scope.calcTdee = function() {
-        $scope.bmr = 10 * $scope.weight + 6.25 * $scope.height - 5 * $scope.age + $scope.sexWeight();
+        if($scope.formula == "katch") {
+            $scope.bmr = katchMcArdle($scope.weight * ((100 - $scope.bodyfat) / 100));
+            return;
+        }
+        $scope.bmr = mifflin($scope.height, $scope.weight, $scope.age, $scope.sex);
     };
 
     $scope.updateLb = function() {
