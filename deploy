@@ -5,15 +5,20 @@ set -u
 
 cd $(dirname "$0")
 
+pushd web
+grunt build
+popd
+
 rm -rf dist
 git clone --branch gh-pages "git@github.com:oremj/tdeecalc.git" dist
 
 rsync --exclude=".git" \
     --exclude=".git-ignore" \
-    -av --delete app/ dist/
+    -av --delete web/dist/ dist/
 
 cd dist;
-bower install
+
+echo www.tdeecalc.com > CNAME
 
 git add .
 git commit -a -m "$(date)"

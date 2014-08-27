@@ -1,34 +1,44 @@
-angular.module('tdee', []).controller('TdeeCtrl', function($scope, $locale) {
+'use strict';
+
+/**
+ * @ngdoc function
+ * @name tdeecalcApp.controller:MainCtrl
+ * @description
+ * # MainCtrl
+ * Controller of the tdeecalcApp
+ */
+angular.module('tdeecalcApp')
+  .controller('MainCtrl', function ($scope) {
     $scope.bmr = 0;
     $scope.customMultiplier = 1.9;
 
     $scope.age = 35;
     $scope.bodyfat = 20;
-    $scope.formula = "mifflin";
+    $scope.formula = 'mifflin';
     $scope.height = 183;
-    $scope.sex = "male";
+    $scope.sex = 'male';
     $scope.weight = 83;
     $scope.goalLbs = 0;
 
-    lbToKg = function(w) {
-        return w * 0.463592;
-    };
+    function lbToKg(w) {
+      return w * 0.463592;
+    }
 
-    kgToLb = function(w) {
-        return w * 2.20462;
-    };
+    function kgToLb(w) {
+      return w * 2.20462;
+    }
 
-    inToCm = function(h) {
-        return h * 2.54;
-    };
+    function inToCm(h) {
+      return h * 2.54;
+    }
 
-    cmToIn = function(h) {
-        return h * 0.393701;
-    };
+    function cmToIn(h) {
+      return h * 0.393701;
+    }
 
     function mifflin(h, w, age, sex) {
-        var sexWeight = sex == "male" ? 5 : -161;
-        return 10 * w + 6.25 * h - 5 * age + sexWeight;
+      var sexWeight = sex === 'male' ? 5 : -161;
+      return 10 * w + 6.25 * h - 5 * age + sexWeight;
     }
 
     function katchMcArdle(lbm) {
@@ -36,7 +46,7 @@ angular.module('tdee', []).controller('TdeeCtrl', function($scope, $locale) {
     }
 
     $scope.calcTdee = function() {
-        if($scope.formula == "katch") {
+        if($scope.formula === 'katch') {
             $scope.bmr = katchMcArdle($scope.weight * ((100 - $scope.bodyfat) / 100));
             return;
         }
@@ -69,15 +79,4 @@ angular.module('tdee', []).controller('TdeeCtrl', function($scope, $locale) {
     $scope.updateKg();
     $scope.updateCm();
     $scope.calcTdee();
-}).directive('tdeeActivityRow', function() {
-    return {
-        restrict: "A",
-        scope: {
-            bmr: "=",
-            desc: "@",
-            goalLbs: "=",
-            mult: "="
-        },
-        templateUrl: "activity-row.html",
-    };
-});
+  });
