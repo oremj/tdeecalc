@@ -42,38 +42,38 @@ angular.module('tdeecalcApp')
     }
 
     function katchMcArdle(lbm) {
-        return 370 + (21.6 * lbm);
+      return 370 + (21.6 * lbm);
     }
 
     $scope.calcTdee = function() {
-        if($scope.formula === 'katch') {
-            $scope.bmr = katchMcArdle($scope.weight * ((100 - $scope.bodyfat) / 100));
-            return;
-        }
-        $scope.bmr = mifflin($scope.height, $scope.weight, $scope.age, $scope.sex);
+      if($scope.formula === 'katch') {
+        $scope.bmr = katchMcArdle($scope.weight * ((100 - $scope.bodyfat) / 100));
+        return;
+      }
+      $scope.bmr = mifflin($scope.height, $scope.weight, $scope.age, $scope.sex);
     };
 
     $scope.updateLb = function() {
-        $scope.weight = Math.round(lbToKg($scope.weightLb));
-        $scope.calcTdee();
+      $scope.weight = Math.round(lbToKg($scope.weightLb));
+      $scope.calcTdee();
     };
 
     $scope.updateIn = function() {
-        var inches = $scope.heightFt * 12 + $scope.heightIn;
-        $scope.height = Math.round(inToCm(inches));
-        $scope.calcTdee();
+      var inches = $scope.heightFt * 12 + $scope.heightIn;
+      $scope.height = Math.round(inToCm(inches));
+      $scope.calcTdee();
     };
 
     $scope.updateCm = function() {
-        var inches = Math.round(cmToIn($scope.height));
-        $scope.heightFt = Math.floor(inches / 12);
-        $scope.heightIn = Math.round(inches - 12 * $scope.heightFt);
-        $scope.calcTdee();
+      var inches = Math.round(cmToIn($scope.height));
+      $scope.heightFt = Math.floor(inches / 12);
+      $scope.heightIn = Math.round(inches - 12 * $scope.heightFt);
+      $scope.calcTdee();
     };
 
     $scope.updateKg = function() {
-        $scope.weightLb = Math.round(kgToLb($scope.weight));
-        $scope.calcTdee();
+      $scope.weightLb = Math.round(kgToLb($scope.weight));
+      $scope.calcTdee();
     };
 
     $scope.updateKg();
